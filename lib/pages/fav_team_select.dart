@@ -55,15 +55,10 @@ class _FavTeamSelectState extends State<FavTeamSelect> {
                       if (loadingProgress == null) {
                         return child;
                       }
-                      //return const LoadingWidget();
-                      return Image.asset("assets/south_korea.png");
+                      return const LoadingWidget();
+                      // return Image.asset("assets/south_korea.png");
                     }),
-                  // leading: FadeInImage(
-                  //   image: activeTeamData[index].imgUrl.isEmpty ? AssetImage('assets/south_korea.png') as ImageProvider : NetworkImage(activeTeamData[index].imgUrl),
-                  //   placeholder: AssetImage('assets/bigTurbo.jpg') //TODO: MAKE THIS A LOADING IMAGE
-                  // ),
                     trailing: Icon(Icons.star_border)
-
                   ),
                   ),
             );
