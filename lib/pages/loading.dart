@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rl_app/services/get_active_teams.dart';
+import 'package:rl_app/services/get_single_team.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -17,11 +18,12 @@ List<FavoriteCardData> getFavoriteCardDataList(teamsList) {
     currentTeam = teamsList[i];
     if (currentTeam['players'].length < 3) {
       playerTagList = 'None Found';
+    } else {
+      playerTagList =
+          '${currentTeam['players'][0]['tag']}, ${currentTeam['players'][1]['tag']}, ${currentTeam['players'][2]['tag']}';
     }
-    else {
-      playerTagList = '${currentTeam['players'][0]['tag']}, ${currentTeam['players'][1]['tag']}, ${currentTeam['players'][2]['tag']}';
-    }
-    listOfFavoriteCardData.add(FavoriteCardData(currentTeam['team']['name'],
+    listOfFavoriteCardData.add(FavoriteCardData(
+        currentTeam['team']['name'],
         playerTagList,
         currentTeam['team']['region'],
         currentTeam['team']['image']));
@@ -33,16 +35,18 @@ class _LoadingState extends State<Loading> {
   TeamData teamsList = TeamData();
   void setupTeamCardData() async {
     await teamsList.getTeamData();
-    List<FavoriteCardData> activeTeamData = getFavoriteCardDataList(teamsList.teamsList);
+    List<FavoriteCardData> activeTeamData =
+        getFavoriteCardDataList(teamsList.teamsList);
     Navigator.pushReplacementNamed(context, '/fav_team_select', arguments: {
       'teamsList': activeTeamData,
     });
   }
 
   Future<List> accountNullImage(teamListMap) {
-    for (var i = 0; i >= teamListMap.length; i++){
+    for (var i = 0; i >= teamListMap.length; i++) {
       if (teamListMap[i]['team'].containsKey('image') == false) {
-        teamListMap[i]['team']['image'] = 'https://griffon.octane.gg/teams/BS+COMPETITION.png';
+        teamListMap[i]['team']['image'] =
+            'https://griffon.octane.gg/teams/BS+COMPETITION.png';
       }
     }
     return teamListMap;
@@ -51,6 +55,7 @@ class _LoadingState extends State<Loading> {
   @override
   void initState() {
     super.initState();
+    SingleTeamPlayers().getSingleTeamPlayers('6020bc70f1e4807cc70023c7');
     setupTeamCardData();
   }
 

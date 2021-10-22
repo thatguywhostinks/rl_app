@@ -3,26 +3,17 @@ import 'package:lottie/lottie.dart';
 import 'package:rl_app/services/get_active_teams.dart';
 import 'package:rl_app/widgets/loading_widget.dart';
 
-// List accountNullImage(teamListMap) {
-//   for (var i = 0; i >= teamListMap.length; i++){
-//     if (teamListMap[i]['team'].containsKey('image') == false) {
-//       teamListMap[i]['team']['image'] = 'https://griffon.octane.gg/teams/BS+COMPETITION.png';
-//     }
-//   }
-//   return teamListMap;
-// }
-
 // Idea for layout is:
-// ListView with Team Photo -> Team Name -> 3 main players (w/Nationality flag)
+// Team logo on top with name below
 
-class FavTeamSelect extends StatefulWidget {
-  const FavTeamSelect({Key? key}) : super(key: key);
+class DisplaySingleTeam extends StatefulWidget {
+  const DisplaySingleTeam({Key? key}) : super(key: key);
 
   @override
-  _FavTeamSelectState createState() => _FavTeamSelectState();
+  _DisplaySingleTeamState createState() => _DisplaySingleTeamState();
 }
 
-class _FavTeamSelectState extends State<FavTeamSelect> {
+class _DisplaySingleTeamState extends State<DisplaySingleTeam> {
   Map teamDataMap = {};
 
   @override
@@ -69,7 +60,3 @@ class _FavTeamSelectState extends State<FavTeamSelect> {
     // style: TextStyle(fontSize: 12.0));
   }
 }
-// https://griffon.octane.gg/teams/BS+COMPETITION.png
-// '${teamData['data']['teams'][5]['team']['image']}'))
-// child: Image.network(
-// '${teamData['data']['teams'][100]['team']['image']}')
