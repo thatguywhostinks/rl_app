@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rl_app/services/get_active_teams.dart';
+import 'package:rl_app/widgets/loading_widget.dart';
 
 
 // List accountNullImage(teamListMap) {
@@ -44,10 +45,23 @@ class _FavTeamSelectState extends State<FavTeamSelect> {
                   title: Text('${activeTeamData[index].teamName}'
                       ' | Players: ${activeTeamData[index].playerTagList}'
                       ' | Region: ${activeTeamData[index].region}'),
-                  leading: FadeInImage(
-                    image: NetworkImage(activeTeamData[index].imgUrl),
-                    placeholder: AssetImage('bigTurbo.jpg') //TODO: MAKE THIS A LOADING IMAGE
-                  ),
+                  leading:Image.network(
+                    activeTeamData[index].imgUrl,
+                    errorBuilder:
+                    (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return Image.asset('assets/bigTurbo.jpg');
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      //return const LoadingWidget();
+                      return Image.asset("assets/south_korea.png");
+                    }),
+                  // leading: FadeInImage(
+                  //   image: activeTeamData[index].imgUrl.isEmpty ? AssetImage('assets/south_korea.png') as ImageProvider : NetworkImage(activeTeamData[index].imgUrl),
+                  //   placeholder: AssetImage('assets/bigTurbo.jpg') //TODO: MAKE THIS A LOADING IMAGE
+                  // ),
                     trailing: Icon(Icons.star_border)
 
                   ),
