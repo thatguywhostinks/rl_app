@@ -15,7 +15,7 @@ List<FavoriteCardData> getFavoriteCardDataList(teamsList) {
   print(teamsList.length);
   for (var i = 0; i < teamsList.length; i++) {
     currentTeam = teamsList[i];
-    if (currentTeam['players'].length != 3) {
+    if (currentTeam['players'].length < 3) {
       playerTagList = 'None Found';
     }
     else {

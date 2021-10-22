@@ -28,10 +28,8 @@ class TeamData {
       data = jsonDecode(response.body);
       // print(data['teams']);
       data =  accountNullImageAndRegion(data);
-
       //Parsing the data to be a List of "team" which is a map
       teamsList =  data['teams'];
-
     } catch (e) {
       print('Failed to get active team data: $e');
       teamsList = [0];
