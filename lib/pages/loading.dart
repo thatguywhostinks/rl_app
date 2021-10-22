@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rl_app/services/get_active_teams.dart';
+import 'package:rl_app/services/get_events.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -12,7 +13,6 @@ List<FavoriteCardData> getFavoriteCardDataList(teamsList) {
   List<FavoriteCardData> listOfFavoriteCardData = [];
   Map currentTeam;
   String playerTagList;
-  print(teamsList.length);
   for (var i = 0; i < teamsList.length; i++) {
     currentTeam = teamsList[i];
     if (currentTeam['players'].length < 3) {

@@ -26,6 +26,7 @@ class TeamData {
       Map data;
       Response response =
       await get(Uri.parse('https://zsr.octane.gg/teams/active'));
+      Future.delayed(Duration(seconds: 5));
       data = jsonDecode(response.body);
       // print(data['teams']);
       data =  accountNullImageAndRegion(data);

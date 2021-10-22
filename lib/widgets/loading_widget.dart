@@ -9,7 +9,7 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Lottie.asset('assets/lottie/4847-wheel-loading-animation.gif'),
+      child: Image.network('https://giphy.com/gifs/congratulations-congrats-xT0xezQGU5xCDJuCPe'),
       constraints: BoxConstraints(maxHeight: 20.0, maxWidth: 50.0),
     );
   }

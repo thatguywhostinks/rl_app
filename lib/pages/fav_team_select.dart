@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rl_app/services/get_active_teams.dart';
 import 'package:rl_app/widgets/loading_widget.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 // List accountNullImage(teamListMap) {
@@ -55,7 +56,10 @@ class _FavTeamSelectState extends State<FavTeamSelect> {
                       if (loadingProgress == null) {
                         return child;
                       }
-                      return const LoadingWidget();
+                      return Container(
+                          child: SpinKitCircle(color: Colors.blue),
+                          constraints: BoxConstraints(maxHeight: 100.0, maxWidth: 50.0),
+                      );
                       // return Image.asset("assets/south_korea.png");
                     }),
                     trailing: Icon(Icons.star_border)
