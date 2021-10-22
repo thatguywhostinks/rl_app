@@ -30,7 +30,6 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.4
-  #firebase_core: "0.7.0"
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -41,7 +40,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  http: any
   intl: any
   flutter_spinkit: any
 
@@ -67,7 +65,6 @@ flutter:
   assets:
     - assets/
     - assets/lottie/
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
