@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
+import 'package:rl_app/widgets/loading_widget.dart';
 
 Map accountNullImageAndRegion (data) {
   for (var i = 0; i < data['teams'].length; i++){
     if (data['teams'][i]['team'].containsKey('image') == false) {
-      data['teams'][i]['team']['image'] = 'assets/bigTurbo.jpg';
+      data['teams'][i]['team']['image'] = "";
     }
     if (data['teams'][i]['team'].containsKey('region') == false){
       data['teams'][i]['team']['region'] = 'None';
