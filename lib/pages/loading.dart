@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rl_app/services/get_active_teams.dart';
 import 'package:rl_app/services/get_events.dart';
+import 'package:lottie/lottie.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -9,28 +11,9 @@ class Loading extends StatefulWidget {
   _LoadingState createState() => _LoadingState();
 }
 
-List<FavoriteCardData> getFavoriteCardDataList(teamsList) {
-  List<FavoriteCardData> listOfFavoriteCardData = [];
-  Map currentTeam;
-  String playerTagList;
-  for (var i = 0; i < teamsList.length; i++) {
-    currentTeam = teamsList[i];
-    if (currentTeam['players'].length < 3) {
-      playerTagList = 'None Found';
-    }
-    else {
-      playerTagList = '${currentTeam['players'][0]['tag']}, ${currentTeam['players'][1]['tag']}, ${currentTeam['players'][2]['tag']}';
-    }
-    listOfFavoriteCardData.add(FavoriteCardData(currentTeam['team']['name'],
-        playerTagList,
-        currentTeam['team']['region'],
-        currentTeam['team']['image']));
-  }
-  return listOfFavoriteCardData;
-}
-
 class _LoadingState extends State<Loading> {
   TeamData teamsList = TeamData();
+  EventData test = EventData();
   void setupTeamCardData() async {
     await teamsList.getTeamData();
     List<FavoriteCardData> activeTeamData = getFavoriteCardDataList(teamsList.teamsList);
@@ -38,24 +21,33 @@ class _LoadingState extends State<Loading> {
       'teamsList': activeTeamData,
     });
   }
-
-  Future<List> accountNullImage(teamListMap) {
-    for (var i = 0; i >= teamListMap.length; i++){
-      if (teamListMap[i]['team'].containsKey('image') == false) {
-        teamListMap[i]['team']['image'] = 'https://griffon.octane.gg/teams/BS+COMPETITION.png';
-      }
-    }
-    return teamListMap;
+  //CAN COMMENT OUT FOR NOW TO TEST OTHER PAGES
+  // @override
+  //   void initState() {
+  //     super.initState();
+  //     setupTeamCardData();
+//   }
+  //**************TESTING BLOCK****************
+  void setupEventSchedule() async {
+    List<EventCard> EventCardList;
+    await test.getEventData(region: 'NA', afterDate: '2021-10-01',tier: 'A');
+    EventCardList = getEventCardDataList(test.eventList);
+    Navigator.pushReplacementNamed(context, '/event_schedule', arguments: {'events': EventCardList});
   }
 
-  @override
-  void initState() {
-    super.initState();
-    setupTeamCardData();
-  }
+  // @override
+  //   void initState() {
+  //   super.initState();
+  //   setupEventSchedule();
+  // }
+//********************************************
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Text('Loading');
+    return Scaffold(
+      body: SpinKitCircle(color: Colors.red),
+    );
   }
 }

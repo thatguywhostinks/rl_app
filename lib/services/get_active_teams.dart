@@ -16,8 +16,25 @@ Map accountNullImageAndRegion (data) {
   return data;
 }
 
-//Calling this function gets a Map of Maps for all "active" teams
-// key of "teams" has corresponding value in form of a List
+List<FavoriteCardData> getFavoriteCardDataList(teamsList) {
+  List<FavoriteCardData> listOfFavoriteCardData = [];
+  Map currentTeam;
+  String playerTagList;
+  for (var i = 0; i < teamsList.length; i++) {
+    currentTeam = teamsList[i];
+    if (currentTeam['players'].length < 3) {
+      playerTagList = 'None Found';
+    }
+    else {
+      playerTagList = '${currentTeam['players'][0]['tag']}, ${currentTeam['players'][1]['tag']}, ${currentTeam['players'][2]['tag']}';
+    }
+    listOfFavoriteCardData.add(FavoriteCardData(currentTeam['team']['name'],
+        playerTagList,
+        currentTeam['team']['region'],
+        currentTeam['team']['image']));
+  }
+  return listOfFavoriteCardData;
+}
 
 class TeamData {
   List? teamsList;
@@ -26,7 +43,6 @@ class TeamData {
       Map data;
       Response response =
       await get(Uri.parse('https://zsr.octane.gg/teams/active'));
-      Future.delayed(Duration(seconds: 5));
       data = jsonDecode(response.body);
       // print(data['teams']);
       data =  accountNullImageAndRegion(data);
